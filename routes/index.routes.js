@@ -5,4 +5,8 @@ router.get("/", (req, res, next) => {
   res.render("index");
 });
 
+router.get("/playground", (req, res, next) => {
+  res.render("playground");
+});
+
 module.exports = router;
