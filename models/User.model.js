@@ -8,6 +8,10 @@ const userSchema = new Schema(
       // unique: true -> Ideally, should be unique, but its up to you
     },
     password: String,
+    email: String,
+    preferences: String,
+    location: String,
+    // date: new Date()
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

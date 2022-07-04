@@ -14,9 +14,25 @@ const express = require("express");
 const hbs = require("hbs");
 
 const app = express();
+const User = require('./models/User.model')
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
+
+const session = require('express-session')
+const MongoStore = require('connect-mongo')
+
+app.use(
+	session({
+		secret: process.env.SESSION_SECRET,
+		cookie: { maxAge: 1000 * 60 * 60 * 24 },
+		resave: true,
+		saveUninitialized: true,
+		store: MongoStore.create({
+			mongoUrl: process.env.MONGODB_URI
+		})
+	})
+)
 
 const capitalized = require("./utils/capitalized");
 const projectName = "new-app";
