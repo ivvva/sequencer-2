@@ -1,5 +1,5 @@
 require("dotenv/config");
-// require("./db");
+require("./db");
 
 const express = require("express");
 
@@ -17,7 +17,6 @@ app.locals.appTitle = `${capitalized(projectName)} created with IronLauncher`;
 // 👇 Start handling routes here
 const index = require("./routes/index.routes");
 app.use("/", index);
-
 
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
