@@ -25,7 +25,7 @@
         type="email"
         name="email"
         style="background-color: transparent; border:2px solid #232526; outline: none; padding: 5px; border-radius: 5px"
-        required
+        requiresd
       />
     </label>
     <label>
@@ -39,9 +39,11 @@
     </label>
     <button type="submit" href="playground">Submit</button>
   </form>
-  <div class="divider"><span>---------</span>  Already have an account? <span>---------</span></div>
+  <div class="divider"><span>---------</span>
+    Already have an account?
+    <span>---------</span></div>
   <a href="/auth/login">Log In</a>
-{{#if errorMessage}}
-  {{errorMessage}}
-{{/if}}
+  {{#if errorMessage}}
+    {{errorMessage}}
+  {{/if}}
 </div>
