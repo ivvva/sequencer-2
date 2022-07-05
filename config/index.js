@@ -38,7 +38,10 @@ module.exports = (app) => {
   // To have access to `body` property in the request
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
-  app.use(cookieParser());
+  app.use(cookieParser()); 
+
+  // hbs.registerPartials(__dirname + "/views/partials");
+  hbs.registerPartials(path.join(__dirname, "..", "/views/partials"));
 
   // Normalizes the path to the views folder
   app.set("views", path.join(__dirname, "..", "views"));
@@ -46,8 +49,6 @@ module.exports = (app) => {
   app.set("view engine", "hbs");
   // AHandles access to the public folder
   app.use(express.static(path.join(__dirname, "..", "public")));
-
-  hbs.registerPartials(__dirname + "/views/partials");
 
   // Handles access to the favicon
   app.use(
