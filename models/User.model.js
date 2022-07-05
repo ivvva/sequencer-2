@@ -5,7 +5,7 @@ const userSchema = new Schema({
   name: {
     type: String,
   },
-  avatar: {
+  image: {
     type: String,
   },
   cloudinary_id: {

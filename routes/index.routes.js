@@ -27,6 +27,7 @@ router.get("/sequence/delete/:id", (req, res, next) => {
 
 router.post("/sequences", uploader.single("image"), (req, res, next) => {
   console.log(req.file) 
+  // amend these const values
   const { title, description } = req.body 
   const imgName = req.file.originalname 
   const imgPath = req.file.path 
