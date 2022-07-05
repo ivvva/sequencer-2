@@ -3,16 +3,7 @@ const Sequence = require("../models/Sequence")
 const {uploader, cloudinary} = require("../config/cloudinary"); 
 const User = require('../models/User.model.js');
 
-function loginCheck() {
-  return (req, res, next) => {
-    if (req.isAuthenticated()) {
-      next();
-    } else {
-      res.redirect("/auth/signup");
-    }
-  };
-}
-
+/* GET home page */
 router.get("/", (req, res, next) => {
   Sequence.find().then(sequences => { 
     res.render("index", { sequences })
@@ -57,7 +48,7 @@ router.get('/participation-history', (req, res, next) => {
     User.find() // order users by most recent to oldest after login. change here later?
         .then(allTheUsersFromDB => {
             console.log('Retrieved users from DB:', allTheUsersFromDB);
-            res.render('participationHistory', {users: allTheUsersFromDB}); // a user object with key
+            res.render('participationHistory', {users: allTheUsersFromDB}); 
         })
         .catch(error => {
         console.log('Error while getting the users from the DB: ', error);
@@ -67,13 +58,5 @@ router.get('/participation-history', (req, res, next) => {
         });
     }
 ); 
-
-module.exports = router;
-  res.render("auth/signup");
-});
-
-router.get("/playground", (req, res, next) => {
-  res.render("playground");
-});
 
 module.exports = router;
