@@ -3,12 +3,15 @@
 {{!-- since we passed allTheUsersFromDB as `users`,
 we can iterate over it here with #each--}}
 
-{{#each users}}
+{{#each this}}
   <div>
     <p>{{username}}</p>
     <p>{{location}}</p>
     <p>{{timestamps}}</p> 
-    <a href="/users/{{_id}}">User details</a>
+    {{!-- <a href="/users/{{_id}}">User details</a> --}}
   </div>
 {{/each}}
+{{!-- remove above content 
+      use partial here 
+--}}
 

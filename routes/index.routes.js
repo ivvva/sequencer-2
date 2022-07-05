@@ -48,7 +48,7 @@ router.get('/participation-history', (req, res, next) => {
     User.find() // order users by most recent to oldest after login. change here later?
         .then(allTheUsersFromDB => {
             console.log('Retrieved users from DB:', allTheUsersFromDB);
-            res.render('participationHistory');
+            res.render('participationHistory', {users: allTheUsersFromDB}); // a user object with key
         })
         .catch(error => {
         console.log('Error while getting the users from the DB: ', error);

@@ -1,2 +1,17 @@
 <h2>Participation History</h2>
-{{> participationList}} 
+
+{{#each users}}
+    <p>TEST</p>
+    <div>
+        <p>{{username}}</p>
+        <p>{{location}}</p>
+        <p>{{timestamps}}</p> 
+        <a href="/users/{{_id}}">User details</a>
+    </div>
+{{/each}}
+
+
+{{!-- {{> participationList allTheUsersFromDB}}  --}}
+{{!-- passing parameters to partials TODO 
+see layouts & partials 
+--}}
