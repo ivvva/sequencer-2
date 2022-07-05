@@ -14,8 +14,4 @@ router.get("/", (req, res, next) => {
   res.render("auth/signup");
 });
 
-router.get("/playground", (req, res, next) => {
-  res.render("playground");
-});
-
 module.exports = router;
