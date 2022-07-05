@@ -4,6 +4,7 @@
 }
 
 body {
+  overflow: hidden;
   padding: 50px;
   font-family: ABCMaxiPlusVariable-Trial;
   display: flex;
@@ -14,6 +15,16 @@ body {
   padding: 0;
 }
 
+.bgVideo {
+  filter: brightness(-20%);
+  filter: contrast(-10%);
+  filter: grayscale(70%);
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
 a {
   color: #00b7ff;
 }
@@ -23,7 +34,7 @@ h1 {
 }
 
 .popup-container {
-  background: linear-gradient(0.25turn, #232526, #414345);
+  background: linear-gradient(0.25turn, #1b1c1d, #232526);
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -34,16 +45,16 @@ h1 {
   font-size: 18px;
   font-weight: 600;
   text-transform: capitalize;
-  padding: 10px 15px; 
+  padding: 10px 15px;
   border: none;
   outline: none;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   border-radius: 30px;
   position: fixed;
+  box-shadow: 39px 39px 100px #0d0c0c, -39px -39px 100px #131212;
 }
 
 .popup-container-login {
-  background: linear-gradient(0.25turn, #232526, #414345);
+  background: linear-gradient(0.25turn, #1b1c1d, #232526);
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -57,8 +68,9 @@ h1 {
   padding: 10px 15px;
   border: none;
   outline: none;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   border-radius: 30px;
+  position: fixed;
+  box-shadow: 39px 39px 100px #0d0c0c, -39px -39px 100px #131212;
 }
 
 .popup-container label input,
