@@ -8,7 +8,12 @@ const userSchema = new Schema(
       // unique: true -> Ideally, should be unique, but its up to you
     },
     password: String,
-    email: String,
+    email: {
+      type: String,
+      required: true
+    
+    }, 
+
     favourites: String,
     location: String,
     date: String,
@@ -28,5 +33,7 @@ const userSchema = new Schema(
 );
 
 const User = model("User", userSchema);
+
+
 
 module.exports = User;

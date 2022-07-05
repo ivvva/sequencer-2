@@ -1,9 +1,13 @@
+
+
+
+
 function setup() {
   let c = createCanvas(windowWidth, windowHeight);
 
-  saveFileBtn = createButton("Save");
-  saveFileBtn.position(120, 8);
-  saveFileBtn.mousePressed(saveToFile);
+  // saveFileBtn = createButton("Save");
+  // saveFileBtn.position(120, 8);
+  // saveFileBtn.mousePressed(saveToFile);
 }
 
 document.querySelector("button")?.addEventListener("click", async () => {
@@ -23,8 +27,6 @@ let synth = new Tone.Synth({ oscillator: { type: "square8" } }).toDestination();
 
 Tone.Master.volume.value = -15;
 
-//  if there are more than 10 clicks > make reverb higher (select parameter)
-// start with high ping pong and slowly reduce
 
 let revWet = 0.3;
 
@@ -44,8 +46,9 @@ chorus.connect(pingPong)
 pingPong.connect(reverb)
 
 
-let notes = [];
+
 let note = "";
+let notes = [];
 
 function checkNote() {
 
@@ -242,13 +245,14 @@ function checkNote() {
 
 
 function mousePressed() {
-  //circle
-  loop();
-  strokeWeight(0);
-  fill(0);
 
-  circle(mouseX, mouseY, 29);
-  noLoop();
+    //circle
+    loop();
+    strokeWeight(0);
+    fill(0);
+  
+    circle(mouseX, mouseY, 29);
+    noLoop();
 
   checkNote()
   notes.push(note)
@@ -257,12 +261,13 @@ function mousePressed() {
 Tone.Transport.bpm.value = 30;
 
 
+Tone.Transport.pause();
 
 const seq = new Tone.Sequence(
   (time, note) => {
     synth.triggerAttackRelease(note,0.1, time);
    
-  },['D3', 'F3', 'G3', 'C4', 'Bb3', 'A4'],"4n").start();
+  },notes,"4n").start();
 
 Tone.Transport.start();
 
@@ -296,6 +301,12 @@ function draw() {
     // console.log(chorus)
   }
 }
+
+// const sequence = new Composition({notes:'A5'})
+
+// // console.log('fa')
+// composition.save().then(() => console.log('user saved'))
+
 
 // console.log(chorus)
 function windowResized() {
