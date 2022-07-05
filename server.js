@@ -1,6 +1,13 @@
 const app = require("./app");
+const mongoose = require("mongoose");
 
-// ℹ️ Sets the PORT for our app to have access to it. If no env has been set, we hard code it to 3000
+mongoose.connect(
+  process.env.MONGODB_URI,
+  (err) => {
+    if (!err) console.log("db connected");
+    else console.log(err);
+  }
+);
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {

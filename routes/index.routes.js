@@ -3,7 +3,16 @@ const Sequence = require("../models/Sequence")
 const {uploader, cloudinary} = require("../config/cloudinary"); 
 const User = require('../models/User.model.js');
 
-/* GET home page */
+function loginCheck() {
+  return (req, res, next) => {
+    if (req.isAuthenticated()) {
+      next();
+    } else {
+      res.redirect("/auth/signup");
+    }
+  };
+}
+
 router.get("/", (req, res, next) => {
   Sequence.find().then(sequences => { 
     res.render("index", { sequences })
@@ -58,5 +67,13 @@ router.get('/participation-history', (req, res, next) => {
         });
     }
 ); 
+
+module.exports = router;
+  res.render("auth/signup");
+});
+
+router.get("/playground", (req, res, next) => {
+  res.render("playground");
+});
 
 module.exports = router;

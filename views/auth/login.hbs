@@ -1,14 +1,28 @@
-<form action="/auth/login" method="POST">
-   <label> Username
-      <input type="text" name="username">
-   </label>
-   <label> Password
-      <input type="password" name="password">
-   </label>
+<div class="popup-container-login">
+  <h1>Log in</h1>
+  <form action="/auth/login" method="POST">
+    <label>
+      Username
+      <input
+        type="text"
+        name="username"
+        style="background-color: transparent; border:2px solid #232526; outline: none; padding: 5px; border-radius: 5px"
+        required
+      />
+    </label>
+    <label>
+      Password
+      <input
+        type="password"
+        name="password"
+        style="background-color: transparent; border:2px solid #232526; outline: none; padding: 5px; border-radius: 5px"
+        required
+      />
+    </label>
 
-   <button type="submit">Submit</button>
-</form>
-
+    <button type="submit" href="/playground">Submit</button>
+  </form>
+</div>
 {{#if errorMessage}}
-   {{errorMessage}}
+  {{errorMessage}}
 {{/if}}
