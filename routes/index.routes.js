@@ -11,7 +11,8 @@ function loginCheck() {
 }
 
 router.get("/", (req, res, next) => {
-  res.render("auth/signup");
+  res.redirect("/auth/signup")
+
 });
 
 router.get("/playground", (req, res, next) => {
