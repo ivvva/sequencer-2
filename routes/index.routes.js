@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Sequence = require("../models/Sequence") 
 const {uploader, cloudinary} = require("../config/cloudinary"); 
+const User = require('../models/User.model.js');
 
 /* GET home page */
 router.get("/", (req, res, next) => {
@@ -41,5 +42,21 @@ router.post("/sequences", uploader.single("image"), (req, res, next) => {
       next(err)
     })
 });
+
+// GET route to retrieve and display all users
+router.get('/participation-history', (req, res, next) => {
+    User.find() // order users by most recent to oldest after login. change here later?
+        .then(allTheUsersFromDB => {
+            console.log('Retrieved users from DB:', allTheUsersFromDB);
+            res.render('participationHistory');
+        })
+        .catch(error => {
+        console.log('Error while getting the users from the DB: ', error);
+
+        // Call the error-middleware to display the error page to the user
+        next(error);
+        });
+    }
+); 
 
 module.exports = router;

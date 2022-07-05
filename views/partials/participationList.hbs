@@ -1,0 +1,14 @@
+<h1>USERS</h1>
+
+{{!-- since we passed allTheUsersFromDB as `users`,
+we can iterate over it here with #each--}}
+
+{{#each users}}
+  <div>
+    <p>{{username}}</p>
+    <p>{{location}}</p>
+    <p>{{date}}</p> <!-- date or timestamp -->
+    <a href="/users/{{_id}}">See details</a>
+  </div>
+{{/each}}
+
