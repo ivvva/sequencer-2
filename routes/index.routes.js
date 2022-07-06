@@ -11,11 +11,10 @@ function loginCheck() {
 }
 
 router.get("/", (req, res, next) => {
-  res.redirect("/auth/signup")
-
+  res.redirect("/auth/signup");
 });
 
-router.get("/playground", (req, res, next) => {
+router.get("/playground/:sequenceId", (req, res, next) => {
   res.render("playground");
 });
 

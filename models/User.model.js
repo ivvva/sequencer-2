@@ -1,4 +1,5 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, default: mongoose } = require("mongoose");
+const Sequence = require("./Sequence.model");
 
 const userSchema = new Schema(
   {
@@ -6,10 +7,19 @@ const userSchema = new Schema(
       type: String,
       // unique: true -> Ideally, should be unique, but its up to you
     },
-    password: String,
-    email: String,
-    preferences: String,
-    location: String,
+    password: {
+      type: String,
+    },
+    email: {
+      type: String,
+    },
+    preferences: {
+      type: String,
+    },
+    location: {
+      type: String,
+    },
+    sequencers: [],
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const saltRounds = 10;
 
 const User = require("../models/User.model");
+const Sequence = require("../models/Sequence.model");
 
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
@@ -36,7 +37,8 @@ router.post("/signup", async (req, res) => {
         .status(400)
         .render("auth/signup", { errorMessage: "Username already taken." });
     }
-
+    const sequence = await Sequence.create({ notes: [], coordinates: [] });
+    // console.log(sequence)
     await bcrypt.genSalt(saltRounds, (err, salt) => {
       bcrypt.hash(password, salt, (err, hashedPassword) => {
         return User.create({
@@ -44,13 +46,15 @@ router.post("/signup", async (req, res) => {
           password: hashedPassword,
           email,
           location,
+          sequences: [sequence],
         });
       });
     });
-
+    req.session.sequence = sequence;
+    const sequenceId = sequence._id.toString();
+    console.log(sequenceId);
     req.session.user = user;
-    res.redirect("/playground");
-    
+    res.redirect(`/playground/${sequenceId}`);
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
       return res
