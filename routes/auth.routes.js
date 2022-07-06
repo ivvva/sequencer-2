@@ -62,7 +62,10 @@ router.post("/signup", (req, res) => {
         // Create a user and save it in the database
         return User.create({
           username,
-          password: hashedPassword,
+          password: hashedPassword, 
+          email, 
+          preferences, 
+          location
         });
       })
       .then((user) => {
