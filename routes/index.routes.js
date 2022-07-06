@@ -33,7 +33,7 @@ router.post("/sequences", uploader.single("image"), (req, res, next) => {
   const imgName = req.file.originalname 
   const imgPath = req.file.path 
   const publicId = req.file.filename 
-  Sequence.create({ title, description, imgName, imgPath, publicId })
+  Sequence.create({ notes, title, description, imgName, imgPath, publicId })
     .then(sequence => {
       console.log(sequence)
       res.redirect("/")
