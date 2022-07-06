@@ -167,6 +167,16 @@ function checkNote() {
   }
 }
 
+let drawingCoordinatesX = [];
+//288.609375, 481.609375, 454.609375, 370.609375, 556.609375, 634.609375]
+  let drawingCoordinatesY = [];
+  //[301, 468, 528, 538, 350, 486]
+
+  console.log(notes)
+ 
+  //['Bb3', 'F4', 'F4', 'F4', 'F3', 'C4']
+
+
 function mousePressed() {
   loop();
   strokeWeight(0);
@@ -177,6 +187,12 @@ function mousePressed() {
 
   checkNote();
   notes.push(note);
+
+
+  drawingCoordinatesX.push(mouseX)
+  drawingCoordinatesY.push(mouseY)
+
+  console.log(drawingCoordinatesX,drawingCoordinatesY )
 
   Tone.Transport.bpm.value = 30;
   Tone.Transport.pause();
@@ -191,6 +207,10 @@ function mousePressed() {
 
   Tone.Transport.start();
 }
+
+
+
+
 function draw() {
   if (mouseIsPressed === true) {
     mouseCount += 1;
