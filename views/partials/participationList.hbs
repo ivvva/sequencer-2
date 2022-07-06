@@ -1,17 +1,10 @@
 <h1>USERS</h1>
 
-{{!-- since we passed allTheUsersFromDB as `users`,
-we can iterate over it here with #each--}}
-
-{{#each this}}
-  <div>
-    <p>{{username}}</p>
-    <p>{{location}}</p>
-    <p>{{timestamps}}</p> 
-    {{!-- <a href="/users/{{_id}}">User details</a> --}}
-  </div>
-{{/each}}
-{{!-- remove above content 
-      use partial here 
---}}
+<div>
+    {{allTheUsersFromDB.username}}
+    {{allTheUsersFromDB.location}}
+    {{!-- composition image_url --}}
+    {{allTheUsersFromDB.createdAt}}
+    <a href="/existing-composition/{{_id}}">Composition</a>
+</div>
 
