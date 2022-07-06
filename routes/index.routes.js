@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Sequence = require("../models/Sequence") 
+const Sequence = require("../models/Sequence.model.js") 
 const {uploader, cloudinary} = require("../config/cloudinary"); 
 const User = require('../models/User.model.js');
 
@@ -28,12 +28,12 @@ router.get("/sequence/delete/:id", (req, res, next) => {
 
 router.post("/sequences", uploader.single("image"), (req, res, next) => {
   console.log(req.file) 
-  // amend these const values
-  const { title, description } = req.body 
-  const imgName = req.file.originalname 
-  const imgPath = req.file.path 
-  const publicId = req.file.filename 
-  Sequence.create({ notes, title, description, imgName, imgPath, publicId })
+  // pass cloudinary image here. implement upload first.
+  const { notes, drawing } = req.body 
+  const imageName = req.file.originalname 
+  const imageId = req.file.id 
+  const imageUrl = req.file.filename 
+  Sequence.create({ notes, drawing, imageName, imageId, imageUrl })
     .then(sequence => {
       console.log(sequence)
       res.redirect("/")

@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema; 
 const sequenceSchema = new Schema(
     {
-        notes: Array, // sound array
-        drawing: Array // visual array
+        notes: Array,
+        // drawing: url() // cloudinary url for the png drawing
     }
 ); 
 

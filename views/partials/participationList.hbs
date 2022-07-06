@@ -1,10 +1,12 @@
 <h1>USERS</h1>
 
 <div>
-    {{allTheUsersFromDB.username}}
-    {{allTheUsersFromDB.location}}
-    {{!-- composition image_url --}}
-    {{allTheUsersFromDB.createdAt}}
-    <a href="/existing-composition/{{_id}}">Composition</a>
+    {{#each users}}
+        {{username}}
+        {{location}}
+        {{!-- composition image_url --}}
+        {{createdAt}}
+        <a href="/existing-composition/{{_id}}">Composition</a>
+    {{/each}}
 </div>
 
