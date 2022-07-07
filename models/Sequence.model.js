@@ -13,5 +13,4 @@ const sequenceSchema = new Schema(
 );
 
 const Sequence = model("Sequence", sequenceSchema);
-
 module.exports = Sequence;

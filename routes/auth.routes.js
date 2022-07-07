@@ -47,9 +47,10 @@ router.post("/signup", async (req, res) => {
       bcrypt.hash(password, salt, (err, hashedPassword) => {
         return User.create({
           username,
-          password: hashedPassword,
-          email,
-          location,
+          password: hashedPassword, 
+          email, 
+          preferences, 
+          location
           sequencers: [sequence],
         });
       });
