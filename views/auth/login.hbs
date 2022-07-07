@@ -1,3 +1,7 @@
+<video autoplay muted loop class="bgVideo">
+  <source src="/images/video (1).mp4" type="video/mp4" />
+</video>
+
 <div class="popup-container-login">
   <h1>Log in</h1>
   <form action="/auth/login" method="POST">
@@ -20,9 +24,9 @@
       />
     </label>
 
-    <button type="submit" href="/playground">Submit</button>
+    <button type="submit">Submit</button>
   </form>
-</div>
 {{#if errorMessage}}
   {{errorMessage}}
 {{/if}}
+</div>

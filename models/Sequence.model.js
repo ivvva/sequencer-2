@@ -1,12 +1,16 @@
-const mongoose = require('mongoose'); 
-const Schema = mongoose.Schema; 
-const sequenceSchema = new Schema(
-    {
-        notes: [String],
-        drawingX: [String], 
-        drawingY: [String]
-    }
-); 
+const { Schema, model } = require("mongoose");
 
-const Sequence = mongoose.model('Sequence', sequenceSchema); 
-module.exports = Sequence; 
+const sequenceSchema = new Schema(
+  {
+    notes: [String],
+    drawingX: [Number],
+    drawingY: [Number],
+  },
+  {
+    // this second object adds extra properties: `createdAt` and `updatedAt`
+    timestamps: true,
+  }
+);
+
+const Sequence = model("Sequence", sequenceSchema);
+module.exports = Sequence;

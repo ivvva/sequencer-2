@@ -51,11 +51,17 @@ router.get('/participation-history', (req, res, next) => {
         })
         .catch(error => {
         console.log('Error while getting the users from the DB: ', error);
-
+        
         // Call the error-middleware to display the error page to the user
         next(error);
         });
     }
 ); 
+  res.redirect("/auth/signup");
+});
+
+router.get("/playground/:sequenceId", (req, res, next) => {
+  res.render("playground");
+});
 
 module.exports = router;
