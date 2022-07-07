@@ -1,6 +1,10 @@
+
+
+
 function setup() {
   let c = createCanvas(windowWidth, windowHeight);
   console.log('first')
+
 }
 
 document.querySelector("button")?.addEventListener("click", async () => {
@@ -34,6 +38,10 @@ pingPong.connect(reverb);
 
 let note = "";
 let notes = [];
+
+let drawingCoordinatesX = []
+let drawingCoordinatesY = []
+
 
 function checkNote() {
   if (mouseX <= width / 4 && mouseY <= height / 4 && mouseX > 1 && mouseY > 1) {
@@ -177,6 +185,10 @@ function mousePressed() {
 
   checkNote();
   notes.push(note);
+  console.log(notes)
+
+  drawingCoordinatesX.push(mouseX)
+  drawingCoordinatesY.push(mouseY)
 
   Tone.Transport.bpm.value = 30;
   Tone.Transport.pause();
@@ -214,3 +226,29 @@ function draw() {
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
+
+document.querySelector('#save').addEventListener('click', () => {
+
+  console.log('vvggh')
+  let url = window.location.href.slice(33)
+
+  axios.post('/playground/done', {
+  compositionId: url,
+  sequencerNotes: notes,
+  drawingX: drawingCoordinatesX,
+  drawingY: drawingCoordinatesY
+})
+
+.then(function (response) {
+  console.log(response);
+})
+.catch(function (error) {
+  console.log(error);
+});
+	
+})
+
+
+
+
+

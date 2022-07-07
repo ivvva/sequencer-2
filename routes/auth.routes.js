@@ -1,4 +1,5 @@
 const router = require("express").Router();
+var axios = require("axios");
 
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
@@ -15,6 +16,8 @@ const async = require("hbs/lib/async");
 router.get("/signup", (req, res) => {
   res.render("auth/signup");
 });
+
+// console.log(drawingCoordinatesX)
 
 router.post("/signup", async (req, res) => {
   const { username, password, email, location } = req.body;
