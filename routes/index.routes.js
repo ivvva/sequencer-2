@@ -11,7 +11,7 @@ router.get("/", (req, res, next) => {
 }); 
 
 router.get("sequence/add", (req, res, next) => {
-  res.render("sequence-add") // change name to existing-composition
+  res.render("rendered-participation") 
 });
 
 router.get("/sequence/delete/:id", (req, res, next) => {
@@ -28,8 +28,7 @@ router.get("/sequence/delete/:id", (req, res, next) => {
 
 router.post("/sequences", uploader.single("image"), (req, res, next) => {
   console.log(req.file) 
-  // pass cloudinary image here. implement upload first.
-  const { notes, drawing } = req.body 
+  const { notes, drawingX, drawingY } = req.body 
   const imageName = req.file.originalname 
   const imageId = req.file.id 
   const imageUrl = req.file.filename 

@@ -4,11 +4,17 @@ const { Schema, model } = require("mongoose");
 const imageSchema = new Schema(
     {
         imageName: {
-        type: String,
-        required: true
+            type: String,
+            required: true
         },
-        imageId: String, 
-        imageUrl: String,
+        imageId: {
+            type: String, 
+            required: true 
+        },  
+        imageUrl: {
+            type: String, 
+            required: true
+        } 
     },
 );
 
