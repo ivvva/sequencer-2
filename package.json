@@ -1,6 +1,9 @@
 {
   "name": "new-app",
   "version": "0.0.0",
+  "engines": {
+    "node": "16.x"
+  },
   "private": true,
   "scripts": {
     "start": "node server.js",
