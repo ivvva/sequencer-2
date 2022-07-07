@@ -7,6 +7,7 @@ router.get("/", (req, res, next) => {
   Sequence.find()
     .then((sequences) => {
       res.render("index", { sequences });
+      res.redirect("/auth/signup");
     })
     .catch((err) => {
       next(err);
