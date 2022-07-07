@@ -49,7 +49,6 @@ router.post("/signup", async (req, res) => {
           username,
           password: hashedPassword,
           email,
-          preferences,
           location,
           sequencers: [sequence]
         });
@@ -131,6 +130,33 @@ router.post("/login", async (req, res, next) => {
     console.log(error);
   }
 });
+
+router.get("/participation-history", (req, res) => {
+  User.find()
+    .then((allTheUsersFromDB) => {
+      console.log("Retrieved users from DB:", allTheUsersFromDB);
+      res.render("auth/participationHistory", { users: allTheUsersFromDB }); 
+    })
+    .catch((error) => {
+      console.log("Error while getting the users from the DB: ", error);
+      next(error);
+    });
+});
+
+
+router.post("/participation-history", async (req, res, next) => {
+  Sequence.find()
+    .then((allTheSequencesFromDB) => {
+      console.log("Retrieved sequences from DB:", allTheSequencesFromDB);
+      res.render("auth/renderedParticipation/", { sequences: allTheSequencesFromDB }); 
+    })
+    .catch((error) => {
+      console.log("Error while getting the users from the DB: ", error);
+      next(error);
+    });
+});
+
+
 
 router.get("/logout", isLoggedIn, (req, res) => {
   req.session.destroy((err) => {
