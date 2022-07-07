@@ -10,6 +10,7 @@ const Sequence = require("../models/Sequence.model");
 
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
+const async = require("hbs/lib/async");
 
 router.get("/signup", (req, res) => {
   res.render("auth/signup");
@@ -37,8 +38,11 @@ router.post("/signup", async (req, res) => {
         .status(400)
         .render("auth/signup", { errorMessage: "Username already taken." });
     }
-    const sequence = await Sequence.create({ notes: [], coordinates: [] });
-    // console.log(sequence)
+    const sequence = await Sequence.create({
+      notes: [],
+      drawingX: [],
+      drawingY: [],
+    });
     await bcrypt.genSalt(saltRounds, (err, salt) => {
       bcrypt.hash(password, salt, (err, hashedPassword) => {
         return User.create({
@@ -46,14 +50,13 @@ router.post("/signup", async (req, res) => {
           password: hashedPassword,
           email,
           location,
-          sequences: [sequence],
+          sequencers: [sequence],
         });
       });
     });
     req.session.sequence = sequence;
-    const sequenceId = sequence._id.toString();
-    console.log(sequenceId);
     req.session.user = user;
+    const sequenceId = sequence._id.toString();
     res.redirect(`/playground/${sequenceId}`);
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
@@ -77,7 +80,7 @@ router.get("/login", (req, res) => {
   res.render("auth/login");
 });
 
-router.post("/login", (req, res, next) => {
+router.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
 
   if (!username) {
@@ -91,29 +94,41 @@ router.post("/login", (req, res, next) => {
       errorMessage: "Your password needs to be at least 8 characters long.",
     });
   }
-
-  User.findOne({ username })
-    .then((user) => {
-      if (!user) {
-        return res.status(400).render("auth/login", {
-          errorMessage: "Wrong credentials.",
-        });
-      }
-
-      bcrypt.compare(password, user.password).then((isSamePassword) => {
-        if (!isSamePassword) {
-          return res.status(400).render("auth/login", {
-            errorMessage: "Wrong credentials.",
-          });
-        }
-        req.session.user = user;
-        return res.redirect("/playground");
+  try {
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(400).render("auth/login", {
+        errorMessage: "Wrong credentials.",
       });
-    })
+    }
 
-    .catch((err) => {
-      next(err);
+    const isSamePassword = await bcrypt.compare(password, user.password);
+    if (!isSamePassword) {
+      return res.status(400).render("auth/login", {
+        errorMessage: "Wrong credentials.",
+      });
+    }
+
+    // if (user.sequencers.length == 0) {
+    const sequence = await Sequence.create({
+      notes: [],
+      drawingX: [],
+      drawingY: [],
     });
+    req.session.sequence = sequence;
+    req.session.user = user;
+    const sequenceId = sequence._id.toString();
+    res.redirect(`/playground/${sequenceId}`);
+    // }
+    // const lastSequence = await User.find( {sequencers}, { sequencers: { $slice: 1 } });
+    // console.log(lastSequence);
+    // const lastSequenceId = lastSequence._id.toString();
+    // req.session.sequence = lastSequence;
+    // req.session.user = user;
+    // return res.redirect(`/playground/:${lastSequenceId}`);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 router.get("/logout", isLoggedIn, (req, res) => {
