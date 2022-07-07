@@ -1,15 +1,33 @@
+
+// axios.get('/renderedParticipation:id')
+// .then(function (response) {
+//     let drawingX = req.body.drawingX
+//   let drawingY = req.body.drawingY
+//   let notes = req.body.sequencerNotes
+  
+// console.log()
+//   // handle success
+//   console.log(response);
+// })
+// .catch(function (error) {
+//   // handle error
+//   console.log(error);
+// })
+// .then(function () {
+//   // always executed
+// });
+
+
 let note = "";
 let notes = [];
 
-let drawingCoordinatesX = [288.609375, 481.609375, 454.609375, 370.609375, 556.609375, 634.609375]
+let drawingCoordinatesX = ''
 //
-let drawingCoordinatesY = [301, 468, 528, 538, 350, 486]
+let drawingCoordinatesY = ''
 //
 let totalDrawingDots = drawingCoordinatesX.length
 
 let mouseCount = 0;
-
-notes = ['Bb3', 'F4', 'F4', 'F4', 'F3', 'C4']
 
 //Synth enigne
 let synth = new Tone.Synth({ oscillator: { type: "square8" } }).toDestination();
@@ -41,16 +59,12 @@ function setup() {
     }
 
    
-    
   }
   
   document.querySelector("button")?.addEventListener("click", async () => {
     console.log("audio is ready");
   });
   
-
-  
-
 
 function mousePressed() {
 
@@ -74,8 +88,6 @@ function mousePressed() {
     }
 
 }
-
-
 
 
 function windowResized() {

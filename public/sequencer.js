@@ -229,10 +229,9 @@ function windowResized() {
 
 document.querySelector('#save').addEventListener('click', () => {
 
-  console.log('vvggh')
   let url = window.location.href.slice(33)
 
-  axios.post('/playground/done', {
+  axios.post('/renderedParticipation', {
   compositionId: url,
   sequencerNotes: notes,
   drawingX: drawingCoordinatesX,
