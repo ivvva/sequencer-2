@@ -50,7 +50,7 @@ router.post("/signup", async (req, res) => {
           password: hashedPassword, 
           email, 
           preferences, 
-          location
+          location,
           sequencers: [sequence],
         });
       });
