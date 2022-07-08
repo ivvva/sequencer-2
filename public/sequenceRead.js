@@ -1,10 +1,10 @@
 
 let note = "";
-let notes = [];
+let notes = ['Bb3', 'F4', 'F3', 'F3', 'C4', 'Bb3', 'Bb3', 'A4', 'D3', 'D3', 'F4', 'F4', 'Bb3', 'A4', 'A4', 'A4'];
 
-let drawingCoordinatesX = ''
+let drawingCoordinatesX = [471.4921875, 471.4921875, 603.4921875, 585.4921875, 570.4921875, 366.4921875, 356.4921875, 366.4921875, 237.4921875, 237.4921875, 256.4921875, 271.4921875, 390.4921875, 430.4921875, 454.4921875, -22.5078125];
 //
-let drawingCoordinatesY = ''
+let drawingCoordinatesY = [249, 433, 299, 349, 406, 388, 222, 188, 265, 265, 406, 434, 204, 169, 175, 399];
 
 document.querySelector('#open').addEventListener('click', () => {
 
@@ -16,14 +16,14 @@ document.querySelector('#open').addEventListener('click', () => {
   
   .then(function (response) {
    console.log(response.data.composition.drawingX)
-  //  console.log(response.data.composition.drawingY)
-  //  console.log(response.data.composition.notes)
+   console.log(response.data.composition.drawingY)
+   console.log(response.data.composition.notes)
 
-  notes = response.data.composition.notes
-  drawingCoordinatesX = response.data.composition.drawingX
-  drawingCoordinatesY = response.data.composition.drawingY
+  // notes = response.data.composition.notes
+  // drawingCoordinatesX = response.data.composition.drawingX
+  // drawingCoordinatesY = response.data.composition.drawingY
       
-  console.log(notes)
+  
   })
   .catch(function (error) {
     // handle error
@@ -35,8 +35,6 @@ document.querySelector('#open').addEventListener('click', () => {
 
  
 })
-
-
 
 
 //
@@ -74,7 +72,6 @@ function setup() {
     }
   }
   
-
 
 function mousePressed() {
 
