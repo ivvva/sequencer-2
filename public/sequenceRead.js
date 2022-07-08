@@ -1,21 +1,4 @@
 
-// axios.get('/renderedParticipation:id')
-// .then(function (response) {
-//     let drawingX = req.body.drawingX
-//   let drawingY = req.body.drawingY
-//   let notes = req.body.sequencerNotes
-  
-// console.log()
-//   // handle success
-//   console.log(response);
-// })
-// .catch(function (error) {
-//   // handle error
-//   console.log(error);
-// })
-// .then(function () {
-//   // always executed
-// });
 
 
 let note = "";
@@ -57,8 +40,6 @@ function setup() {
         circle(drawingCoordinatesX[i],drawingCoordinatesY[i] , 29);
     line(drawingCoordinatesX[i], drawingCoordinatesY[i] , drawingCoordinatesX[i+1], drawingCoordinatesY[i+1])      
     }
-
-   
   }
   
   document.querySelector("button")?.addEventListener("click", async () => {
@@ -86,10 +67,33 @@ function mousePressed() {
     
       Tone.Transport.start();
     }
-
 }
 
 
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
+
+
+document.querySelector('#open').addEventListener('click', () => {
+
+ axios.get('/participationHistory',{
+ 
+  })
+  
+  .then(function (response) {
+   
+      
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .then(function () {
+    // always executed
+  });
+
+ 
+})
+
+

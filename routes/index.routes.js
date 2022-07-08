@@ -12,7 +12,6 @@ function loginCheck() {
     }
   };
 }
-// renderedparticipation
 
 router.post("/renderedParticipation", (req, res) => {
   console.log(req.body)
@@ -23,16 +22,31 @@ router.post("/renderedParticipation", (req, res) => {
   let notes = req.body.sequencerNotes
 
   Sequence.findByIdAndUpdate(Id, { notes, drawingX , drawingY })
-		.then(() => {
-			res.redirect(`/participationhistory`)
+		.then((Composition) => {
+      
+      console.log("composition:", Composition);
+      res.redirect(`/participationHistory`);
 		})
 		.catch(err => {
 			next(err)
 		})
-
 });
 
+router.get("/renderedParticipation/:id", (req, res) => {
 
+  let id = req.params.id
+  // console.log(req.body)
+  Sequence.findById(id)
+    .then((Composition) => {
+      res.render('renderedParticipation')
+      console.log("composition:", Composition);
+      
+    })
+    .catch((error) => {
+      console.log("Error while getting the users from the DB: ", error);
+      next(error);
+    });
+});
 
 router.get("/", (req, res, next) => {
   res.redirect("/auth/signup");
@@ -48,37 +62,13 @@ router.get("/participationHistory", (req, res) => {
       console.log("Retrieved users from DB:", allTheUsersFromDB);
       res.render("participationHistory", { users: allTheUsersFromDB }); 
     })
+  
     .catch((error) => {
       console.log("Error while getting the users from the DB: ", error);
       next(error);
     });
 });
 
-router.get("/renderedParticipation/:id", (req, res) => {
 
-  let id = req.params['id']
-  console.log(id)
-
-  Sequence.findById(id)
-    .then((Composition) => {
-      console.log("composition:", Composition);
-    })
-    .catch((error) => {
-      console.log("Error while getting the users from the DB: ", error);
-      next(error);
-    });
-});
-
-// router.post("/participation-history", async (req, res, next) => {
-//   Sequence.find()
-//     .then((allTheSequencesFromDB) => {
-//       console.log("Retrieved sequences from DB:", allTheSequencesFromDB);
-//       res.render("renderedParticipation/", { sequences: allTheSequencesFromDB }); 
-//     })
-//     .catch((error) => {
-//       console.log("Error while getting the users from the DB: ", error);
-//       next(error);
-//     });
-// });
 
 module.exports = router;
