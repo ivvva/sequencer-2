@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const Sequence = require("../models/Sequence.model.js");
-const fileUploader = require('../config/cloudinary');
 const User = require("../models/User.model"); 
 const Image = require('../models/Image.model');
 
