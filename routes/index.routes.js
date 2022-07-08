@@ -32,6 +32,18 @@ router.post("/renderedParticipation", (req, res) => {
 		})
 });
 
+router.get("/compositionData/:id", (req, res) => {
+
+  
+  let id = req.params.id
+
+  Sequence.findById(id)
+    .then((composition) => {
+      res.json({composition: composition})
+    })
+
+});
+
 router.get("/renderedParticipation/:id", (req, res) => {
 
   let id = req.params.id

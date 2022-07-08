@@ -230,7 +230,7 @@ function windowResized() {
 document.querySelector('#save').addEventListener('click', () => {
 
   let url = window.location.href.slice(33)
-
+  
   axios.post('/renderedParticipation', {
   compositionId: url,
   sequencerNotes: notes,

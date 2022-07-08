@@ -1,14 +1,46 @@
 
-
-
 let note = "";
 let notes = [];
 
 let drawingCoordinatesX = ''
 //
 let drawingCoordinatesY = ''
+
+document.querySelector('#open').addEventListener('click', () => {
+
+  
+  let url = window.location.href.slice(44)
+  console.log(url)
+
+ axios.get(`/compositionData/${url}`)
+  
+  .then(function (response) {
+   console.log(response.data.composition.drawingX)
+  //  console.log(response.data.composition.drawingY)
+  //  console.log(response.data.composition.notes)
+
+  notes = response.data.composition.notes
+  drawingCoordinatesX = response.data.composition.drawingX
+  drawingCoordinatesY = response.data.composition.drawingY
+      
+  console.log(notes)
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .then(function () {
+    // always executed
+  });
+
+ 
+})
+
+
+
+
 //
-let totalDrawingDots = drawingCoordinatesX.length
+let totalDrawingDots = drawingCoordinatesY.length
 
 let mouseCount = 0;
 
@@ -37,15 +69,12 @@ function setup() {
 
     for(let i = 0; i < totalDrawingDots; i++ ) {
        
-        circle(drawingCoordinatesX[i],drawingCoordinatesY[i] , 29);
+    circle(drawingCoordinatesX[i],drawingCoordinatesY[i] , 29);
     line(drawingCoordinatesX[i], drawingCoordinatesY[i] , drawingCoordinatesX[i+1], drawingCoordinatesY[i+1])      
     }
   }
   
-  document.querySelector("button")?.addEventListener("click", async () => {
-    console.log("audio is ready");
-  });
-  
+
 
 function mousePressed() {
 
@@ -75,25 +104,8 @@ function windowResized() {
 }
 
 
-document.querySelector('#open').addEventListener('click', () => {
 
- axios.get('/participationHistory',{
- 
-  })
-  
-  .then(function (response) {
-   
-      
-  })
-  .catch(function (error) {
-    // handle error
-    console.log(error);
-  })
-  .then(function () {
-    // always executed
-  });
 
- 
-})
+
 
 
